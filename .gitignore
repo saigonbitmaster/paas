@@ -1,0 +1,17 @@
+node_modules
+**/node_modules
+*/build
+**/dist
+.env
+**/.env
+note.txt
+test.ts
+test.js
+
+**/flatworks/shellscripts/wallets
+
+# ignore database & certificates
+docker-config/dbdata
+docker-config/mongobackups
+docker-config/certbot
+
