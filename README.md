@@ -1,12 +1,16 @@
-
 ## Deployed staging urls
+
+```
 Application: https://paas.bworks.app/
 dApp examples: https://paas.bworks.app/#/examples
 APIs: https://paas.bworks.app/api
 Contracts APIs: https://paas.bworks.app/api/contracts
+```
 
 ## Install & run dev
-## Frontend includes web3 part with Cardano_serialize_lib so please set the environment as guide 
+
+## Frontend includes web3 part with Cardano_serialize_lib so please set the environment as guide
+
 ```
 git clone https://github.com/saigonbitmaster/paas
 
@@ -29,7 +33,7 @@ BLOCKFROST_URL=https://cardano-testnet.blockfrost.io/api/v0
 GITHUB_TOKEN=****
 
 cd paas
-yarn 
+yarn
 yarn build-lib
 yarn api
 yarn cms
@@ -37,11 +41,12 @@ yarn web
 ```
 
 ## Build & run app
+
 ```
 git clone https://github.com/saigonbitmaster/paas
 cd paas
 export NODE_OPTIONS="--max-old-space-size=8192"
-yarn 
+yarn
 yarn build-lib
 yarn build-api
 yarn build-cms
@@ -50,6 +55,7 @@ yarn build-web
 ```
 
 ## change the API urls for frontend
+
 ```
 modify .env file variables reflect the login and API urls.
 ```
