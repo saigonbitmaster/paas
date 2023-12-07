@@ -1,8 +1,8 @@
-## Deployed prototype of MVP urls
+## Deployed prototype urls
 
 [Paas App](https://paas.bworks.app/)\
 [dApp Examples](https://paas.bworks.app/#/examples)\
-[Contracts list APIs](https://paas.bworks.app/api/contracts)
+[Smart Contracts APIs](https://paas.bworks.app/api/contracts)
 
 ## Install & run dev
 
