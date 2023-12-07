@@ -20,9 +20,6 @@ DATABASE_HOST=localhost
 DATABASE_PORT=27017
 DATABASE_ACCOUNT=admin
 DATABASE_PASSWORD=****
-#Blockfrost
-BLOCKFROST_PROJECT_ID=****
-BLOCKFROST_URL=https://cardano-testnet.blockfrost.io/api/v0
 #GitHub
 GITHUB_TOKEN=****
 
@@ -33,7 +30,6 @@ yarn api
 yarn cms
 yarn web
 ```
-
 ## Build & run app
 
 ```
@@ -47,7 +43,6 @@ yarn build-cms
 yarn build-web
 
 ```
-
 ## change the API urls for frontend
 
 ```
