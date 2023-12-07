@@ -1,10 +1,10 @@
 ## Deployed staging urls
 
-[App](https://paas.bworks.app/)
-[dApp Examples](https://paas.bworks.app/#/examples)
-[APIs](https://paas.bworks.app/api)
-[Contracts list](https://paas.bworks.app/api/contracts)
-[ne contract](https://paas.bworks.app/api/contracts/${contractId})
+[App](https://paas.bworks.app/)\
+[dApp Examples](https://paas.bworks.app/#/examples)\
+[APIs](https://paas.bworks.app/api)\
+[Contracts list](https://paas.bworks.app/api/contracts)\
+[ne contract](https://paas.bworks.app/api/contracts/${contractId})\
 ## Install & run dev
 
 ```
