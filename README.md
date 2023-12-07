@@ -1,8 +1,9 @@
-## Deployed staging urls
+## Deployed prototype of MVP urls
 
 [Paas App](https://paas.bworks.app/)\
 [dApp Examples](https://paas.bworks.app/#/examples)\
 [Contracts list APIs](https://paas.bworks.app/api/contracts)
+
 ## Install & run dev
 
 ```
@@ -30,6 +31,7 @@ yarn api
 yarn cms
 yarn web
 ```
+
 ## Build & run app
 
 ```
@@ -43,6 +45,7 @@ yarn build-cms
 yarn build-web
 
 ```
+
 ## change the API urls for frontend
 
 ```
