@@ -1,17 +1,14 @@
 ## Deployed staging urls
 
 ```
-This [App] is awesome.
-
 [App]: https://paas.bworks.app/
 [dApp Examples]: https://paas.bworks.app/#/examples
 [APIs]: https://paas.bworks.app/api
 [Contracts APIs]: https://paas.bworks.app/api/contracts
+[Google](https://www.google.com)
 ```
 
 ## Install & run dev
-
-## Frontend includes web3 part with Cardano_serialize_lib so please set the environment as guide
 
 ```
 git clone https://github.com/saigonbitmaster/paas
