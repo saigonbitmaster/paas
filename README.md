@@ -1,4 +1,4 @@
-## Deployed prototype urls
+## Deployed staging urls
 
 [Paas App](https://paas.bworks.app/)\
 [dApp Examples](https://paas.bworks.app/#/examples)\
