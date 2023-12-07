@@ -19,7 +19,7 @@ const customEnglishMessages: TranslationMessages = {
       allSubmittedScripts: "See all submitted scripts",
       allSmartContract: "See all smart contracts",
       submittedSmartContracts: "Submitted smart contracts",
-      plutusTxs: "Plutus TXs",
+      plutusTxs: "Smart contract TXs",
       allPlutusTxs: "See all plutus TXs",
       welcome: {
         title: "Welcome to PSM",
@@ -31,24 +31,30 @@ const customEnglishMessages: TranslationMessages = {
     menu: {
       smartContracts: "Smart contracts",
       reports: "Reports",
-      manageFund: "Plutus calls",
+      manageFund: "API calls",
       tools: "Tools",
       settings: "Settings",
     },
   },
   resources: {
     plutustxs: {
-      name: "Plutus TXs",
+      name: "Smart contract TXs",
+    },
+    dApps: {
+      name: "dApp examples",
+    },
+    tokens: {
+      name: "Access tokens",
     },
     changePassword: {
       name: "Change password",
     },
     verifySmartContract: {
-      name: "Verify a script",
+      name: "Audit contract",
     },
 
     paymentReport: {
-      name: "Plutus API calls",
+      name: "Smart contract API calls",
     },
     reports: {
       import: "Import excels",

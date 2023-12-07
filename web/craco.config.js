@@ -4,7 +4,8 @@ const buffer = require.resolve("buffer/");
 const buffers = ["buffer", "Buffer"];
 const wasmRegExp = /\.wasm$/;
 
-
+/*
+origin:
 const wasmExps = {
   layers: true,
   asyncWebAssembly: false,
@@ -12,6 +13,23 @@ const wasmExps = {
   syncWebAssembly: true,
   topLevelAwait: true,
 }
+change for build:
+const wasmExps = {
+  layers: true,
+  asyncWebAssembly: true,
+  lazyCompilation: false,
+  syncWebAssembly: true,
+  topLevelAwait: true,
+}
+*/
+
+const wasmExps = {
+  layers: true,
+  asyncWebAssembly: true,
+  lazyCompilation: false,
+  syncWebAssembly: true,
+  topLevelAwait: true,
+};
 
 module.exports = {
   webpack: {

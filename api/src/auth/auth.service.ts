@@ -31,6 +31,15 @@ export class AuthService {
     return null;
   }
 
+  //generate token for dApp
+  async createTokenDapp(user: any) {
+    const payload = { sub: user.userId };
+    return this.jwtService.signAsync(payload, {
+      secret: process.env.JWT_TOKEN_SECRET,
+      expiresIn: process.env.JWT_TOKEN_EXPIRE,
+    });
+  }
+
   //generate token for register user
   async createToken(payload: any) {
     return this.jwtService.signAsync(payload, {

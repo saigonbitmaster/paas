@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, BadRequestException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreateContractDto } from './dto/create.dto';
@@ -32,17 +32,29 @@ export class ContractService {
     return await new this.model({
       ...createContractDto,
       createdAt: new Date(),
+      code: createContractDto.cborhex,
     }).save();
   }
 
   async update(
     id: string,
     updateContractDto: UpdateContractDto,
+    userId: string,
   ): Promise<Contract> {
+    const contract = await this.findOne(id);
+    if (contract.author !== userId)
+      throw new BadRequestException(
+        'This is not your contract, the action is not allowed',
+      );
     return await this.model.findByIdAndUpdate(id, updateContractDto).exec();
   }
 
-  async delete(id: string): Promise<Contract> {
+  async delete(id: string, userId: string): Promise<Contract> {
+    const contract = await this.findOne(id);
+    if (contract.author !== userId)
+      throw new BadRequestException(
+        'This is not your contract, the action is not allowed',
+      );
     return await this.model.findByIdAndDelete(id).exec();
   }
 }

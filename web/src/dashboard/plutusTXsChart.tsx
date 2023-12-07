@@ -51,7 +51,7 @@ const PlutusTxsChart = () => {
 
   React.useEffect(() => {
     if (checked) {
-      setLabel("Plutus TXs");
+      setLabel("Smart contract TXs");
       setDataKeys({
         y1: "numberOfLockTxs",
         y2: "numberOfUnlockedTxs",
@@ -59,7 +59,7 @@ const PlutusTxsChart = () => {
         y2Name: "Unlocked Txs",
       });
     } else {
-      setLabel("Plutus TX Amounts (M $Ada)");
+      setLabel("Smart contract TX Amounts (M $Ada)");
       setDataKeys({
         y1: "sumLockedAmounts",
         y2: "sumUnlockedAmounts",
@@ -72,7 +72,7 @@ const PlutusTxsChart = () => {
   return (
     <Card>
       <CardHeader
-        title="Plutus TXs"
+        title="Smart contract TXs"
         titleTypographyProps={{ variant: "subtitle1" }}
       />
       <FormGroup sx={{ ml: 2 }}>

@@ -17,7 +17,7 @@ import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 
 //https://preprod.cardanoscan.io/transaction/ce3862f63580d1a50ff6c121b380e52967c68fcb9af16b746d9112de1ded2c64
-const preprodUrl = "https://preprod.cardanoscan.io/transaction/";
+const preprodUrl = "https://cardanoscan.io/transaction/";
 const ListScreen = () => {
   return (
     <List

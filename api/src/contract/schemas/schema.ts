@@ -16,6 +16,12 @@ export class Contract {
   cborhex: string;
 
   @Prop()
+  code: string;
+
+  @Prop()
+  language: string;
+
+  @Prop()
   version: string;
 
   @Prop()

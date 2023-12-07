@@ -15,6 +15,22 @@ import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs, { Dayjs } from "dayjs";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import FormGroup from "@mui/material/FormGroup";
+import Divider from "@mui/material/Divider";
+import {
+  Edit,
+  SimpleForm,
+  SelectInput,
+  TextInput,
+  DateInput,
+  ArrayInput,
+  NumberInput,
+  SimpleFormIterator,
+  FormDataConsumer,
+} from "react-admin";
+import { useWatch } from "react-hook-form";
 
 //Component for inline datum
 export default function SmartContract(props) {
@@ -22,27 +38,36 @@ export default function SmartContract(props) {
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     //temporary disabled unlock tab to unlock by admin.
-   /*  if (value === "1") {
+    /*  if (value === "1") {
       return;
     } */
     setValue(newValue);
   };
 
   const handleSmartContractChange = props.handleContractChange;
-
+  const handleUnlockUserChange = props.handleUnlockUserChange;
   const selectedContract = props.contract?.selected || null;
+  const selectedUnlockUser = props.unlockUsers?.selected || null;
   const contracts = props.contract?.contracts || [];
-
+  const unlockUsers = props.unlockUsers?.unlockUsers || [];
+  const plutusTxs = props.plutusTxs?.plutusTxs || [];
+  const handlePlutusTxChange = props.handlePlutusTxChange || null;
+  const selectedPlutusTx = props.plutusTxs?.selected || null;
   const sendAdaToPlutus = props.sendAdaToPlutus || null;
   const redeemAdaValues = props.redeemAdaValues || null;
   const handleChangeLockAda = props.handleChangeLockAda || null;
   const handleChangRedeemAda = props.handleChangRedeemAda || null;
   const redeemAdaFromPlutus = props.redeemAdaFromPlutus || null;
   const amountToLock = props.amountToLock || {};
+  const txName = props.txName || "";
+  const handleChangeTxName = props.handleChangeTxName || null;
   const datum = props.datum || {};
   const handleChangeUnlockPartner = props.handleChangeUnlockPartner || null;
-  const unlockPartner = props.unlockPartner || "admin";
+  const unlockPartner = props.unlockPartner || "bworks";
   const handleChangePublicKeyHash = props.handleChangePublicKeyHash || null;
+  const receiveAddress = props.receiveAddress || "";
+  const handleReceiveAddressChange = props.handleReceiveAddressChange || null;
+
   if (!contracts || contracts.length === 0) {
     return (
       <Typography variant="subtitle1" gutterBottom>
@@ -59,12 +84,12 @@ export default function SmartContract(props) {
           <TabList onChange={handleChange} aria-label="wallet actions">
             <Tab
               value="1"
-              label="Lock asset to a smart contract"
+              label="Lock to smart contract"
               sx={{ padding: 0, marginLeft: 0 }} //to make underline of tab equal to text
             />
             <Tab
               value="2"
-              label="Unlock asset from a smart contract"
+              label="Unlock from Smart contract"
               sx={{ padding: 0, marginLeft: 3 }}
             />
           </TabList>
@@ -118,6 +143,15 @@ export default function SmartContract(props) {
                 contracts.find((item) => item.id === selectedContract).address
               }
             />
+
+            <TextField
+              sx={{ width: 240 }}
+              id="standard-basic"
+              label="TX Name"
+              variant="standard"
+              value={txName}
+              onChange={handleChangeTxName}
+            />
             <TextField
               sx={{ width: 500 }}
               id="standard-basic"
@@ -127,30 +161,18 @@ export default function SmartContract(props) {
               value={amountToLock}
               onChange={handleChangeLockAda}
             />
-            <FormControl variant="standard" sx={{ minWidth: 120 }}>
-              <InputLabel id="unlockPartner">Select unlock partner</InputLabel>
-              <Select
-                labelId="unlockPartner"
-                id="unlockPartner"
-                value={unlockPartner}
-                onChange={handleChangeUnlockPartner}
-                label="Select unlock partner"
-                sx={{ width: 240 }}
-              >
-                <MenuItem value={"admin"}>By Admin</MenuItem>
-                <MenuItem value={"other"}>By other</MenuItem>
-              </Select>
-            </FormControl>
+
             <TextField
               sx={{ width: 500 }}
               id="standard-basic"
               label="Datum PublicKeyHash"
               variant="standard"
-              value={datum.publicKeyHash}
-              onChange={handleChangePublicKeyHash}
-              disabled={
-                unlockPartner === "admin" 
+              value={
+                datum.publicKeyHash
+                  ? datum.publicKeyHash
+                  : "Selected unlock user has no wallet"
               }
+              onChange={handleChangePublicKeyHash}
             />
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DateTimePicker
@@ -162,7 +184,23 @@ export default function SmartContract(props) {
                 )}
               />
             </LocalizationProvider>
+            <SimpleForm toolbar={<> </>}>
+              <ArrayInput source="items" label="More datum keys">
+                <SimpleFormIterator inline>
+                  <TextInput source="key" helperText={false} />
 
+                  <SelectInput
+                    source="type"
+                    choices={[
+                      { id: "number", name: "Number" },
+                      { id: "string", name: "String" },
+                      { id: "date", name: "Date" },
+                    ]}
+                  />
+                  <TextInput source="value" helperText={false} fullWidth />
+                </SimpleFormIterator>
+              </ArrayInput>
+            </SimpleForm>
             <Button
               variant="text"
               sx={{ width: 20, marginTop: 3 }}
@@ -173,7 +211,7 @@ export default function SmartContract(props) {
           </Box>
         </TabPanel>
 
-        <TabPanel value="2">
+        <TabPanel value="2" sx={{ padding: 0 }}>
           <Box
             sx={{
               paddingTop: 0,
@@ -184,6 +222,7 @@ export default function SmartContract(props) {
           >
             <Box
               sx={{
+                marginLeft: 0,
                 paddingTop: 0,
                 paddingLeft: 0,
                 display: "flex",
@@ -211,7 +250,24 @@ export default function SmartContract(props) {
                   ))}
                 </Select>
               </FormControl>
-          
+
+              <FormControl variant="standard" sx={{ minWidth: 120 }}>
+                <InputLabel id="simple-select-standard-label">
+                  Select a locked TX
+                </InputLabel>
+                <Select
+                  sx={{ width: 240 }}
+                  labelId="simple-select-standard-label"
+                  id="demo-simple-select-standard"
+                  value={selectedPlutusTx}
+                  onChange={handlePlutusTxChange}
+                  label="contract"
+                >
+                  {plutusTxs.map((item) => (
+                    <MenuItem value={item.id}>{item.name}</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
             </Box>
             <TextField
               sx={{ width: 480 }}
@@ -237,19 +293,11 @@ export default function SmartContract(props) {
             <TextField
               sx={{ width: 480, fontSize: "small" }}
               id="standard-basic"
-              label="UTXO where ADA is locked"
-              value={redeemAdaValues.transactionIdLocked}
+              label="Locked Tx hash"
+              value={redeemAdaValues.lockedTxHash}
               onChange={handleChangRedeemAda("transactionIdLocked")}
               variant="standard"
-            />
-            <TextField
-              sx={{ width: 480 }}
-              id="standard-basic"
-              label="Transaction index"
-              variant="standard"
-              type="number"
-              value={redeemAdaValues.transactionIndxLocked}
-              onChange={handleChangRedeemAda("transactionIndxLocked")}
+              disabled
             />
             <TextField
               sx={{ width: 480 }}
@@ -259,32 +307,55 @@ export default function SmartContract(props) {
               value={redeemAdaValues.amountToRedeem}
               onChange={handleChangRedeemAda("amountToRedeem")}
               type="number"
+              disabled
             />
+
             <TextField
-              sx={{ width: 480 }}
-              id="standard-basic"
-              label="Datum to unlock"
-              variant="standard"
-              value={redeemAdaValues.datumToRedeem}
-              onChange={handleChangRedeemAda("datumToRedeem")}
-            />
-              <TextField
               sx={{ width: 480 }}
               id="standard-basic"
               label="Receiver wallet address"
               variant="standard"
-              value={redeemAdaValues.datumToRedeem}
-              onChange={handleChangRedeemAda("receiverWalletAddress")}
+              value={receiveAddress}
+              onChange={handleReceiveAddressChange}
             />
             <TextField
-              sx={{ width: 480 }}
+              sx={{ width: 240 }}
+              id="standard-basic"
+              label="Transaction index"
+              variant="standard"
+              type="number"
+              disabled
+              value={redeemAdaValues.transactionIndxLocked}
+              onChange={handleChangRedeemAda("transactionIndxLocked")}
+            />
+
+            <TextField
+              sx={{ width: 240 }}
               id="standard-basic"
               label="Fee"
               variant="standard"
-              type="number"
               value={redeemAdaValues.manualFee}
               onChange={handleChangRedeemAda("manualFee")}
+              disabled
             />
+
+            <SimpleForm toolbar={<> </>}>
+              <ArrayInput source="items" label="Create redeemer data">
+                <SimpleFormIterator inline>
+                  <TextInput source="key" helperText={false} />
+
+                  <SelectInput
+                    source="type"
+                    choices={[
+                      { id: "number", name: "Number" },
+                      { id: "string", name: "String" },
+                      { id: "date", name: "Date" },
+                    ]}
+                  />
+                  <TextInput source="value" helperText={false} fullWidth />
+                </SimpleFormIterator>
+              </ArrayInput>
+            </SimpleForm>
             <Button
               variant="text"
               sx={{ width: 20, marginTop: 3 }}
@@ -306,6 +377,43 @@ export default function SmartContract(props) {
       >
         {props.notification?.message}
       </Typography>
+
+      <Divider textAlign="left" sx={{ width: 500, mt: 2 }}></Divider>
+      <Typography
+        variant="subtitle1"
+        sx={{
+          ml: 0,
+          color: "#e65100",
+        }}
+      >
+        Important notes
+      </Typography>
+      {value === "1" ? (
+        <Typography
+          variant="caption"
+          sx={{
+            ml: 0,
+            color: "#ed6c02",
+            width: 500,
+            wordWrap: "break-word",
+          }}
+        >
+          The transaction will be submit to Cardano mainnet: <br />
+          1. Please make sure the correctly Datum before submit. <br />
+          2. Try will small amount first. <br />
+        </Typography>
+      ) : (
+        <Typography
+          variant="caption"
+          sx={{
+            ml: 0,
+            color: "#ed6c02",
+          }}
+        >
+          Please verify with receiver its wallet address before submit the
+          unlock transaction.
+        </Typography>
+      )}
     </Box>
   );
 }

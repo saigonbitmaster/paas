@@ -21,14 +21,14 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 export class ContractController {
   constructor(private readonly service: ContractService) {}
 
-  @UseGuards(JwtAuthGuard)
+  //  @UseGuards(JwtAuthGuard)
   @Get()
   async index(@Response() res: any, @Query() query, @Request() req) {
-    const userId = req.user.userId;
+    //   const userId = req.user.userId;
     const mongooseQuery = queryTransform(query);
-    mongooseQuery.filter.queryType === 'developer'
+    /*  mongooseQuery.filter.queryType === 'developer'
       ? (mongooseQuery.filter.author = userId)
-      : null;
+      : null; */
     delete mongooseQuery.filter.queryType;
     const result = await this.service.findAll(mongooseQuery);
     return formatRaList(res, result);
@@ -59,12 +59,16 @@ export class ContractController {
   async update(
     @Param('id') id: string,
     @Body() updateContractDto: UpdateContractDto,
+    @Request() req,
   ) {
-    return await this.service.update(id, updateContractDto);
+    const userId = req.user['userId'];
+    return await this.service.update(id, updateContractDto, userId);
   }
+
   @UseGuards(JwtAuthGuard)
   @Delete(':id')
-  async delete(@Param('id') id: string) {
-    return await this.service.delete(id);
+  async delete(@Param('id') id: string, @Request() req) {
+    const userId = req.user['userId'];
+    return await this.service.delete(id, userId);
   }
 }

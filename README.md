@@ -1,4 +1,10 @@
 
+## Deployed staging urls
+Application: https://paas.bworks.app/
+dApp examples: https://paas.bworks.app/#/examples
+APIs: https://paas.bworks.app/api
+Contracts APIs: https://paas.bworks.app/api/contracts
+
 ## Install & run dev
 ## Frontend includes web3 part with Cardano_serialize_lib so please set the environment as guide 
 ```
@@ -41,8 +47,6 @@ yarn build-api
 yarn build-cms
 yarn build-web
 
-frontend app after build can be run by any http server e.g nginx server
-backend app after build can be run by: node main.js or pm2
 ```
 
 ## change the API urls for frontend

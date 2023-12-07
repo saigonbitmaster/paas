@@ -22,6 +22,8 @@ import ChangePassword from "./components/changePassword";
 import plutustscripts from "./plutustscripts";
 import yourplutustscripts from "./yourplutustscripts";
 import Typography from "@mui/material/Typography";
+import accesstokens from "./accesstokens";
+import Examples from "./smartcontracts/examples";
 
 const loginUrl = process.env.REACT_APP_LOGIN_URL;
 const apiUrl = process.env.REACT_APP_API_URL;
@@ -62,8 +64,12 @@ const App = () => {
           <Route path="/scontractreports" element={<ContractReports />} />
           <Route path="/apicallreports" element={<ApiCallReports />} />
           <Route path="/changepassword" element={<ChangePassword />} />
-          ParseAddress
         </CustomRoutes>
+
+        <CustomRoutes noLayout>
+          <Route path="/examples" element={<Examples />} />
+        </CustomRoutes>
+        <Resource name="accesstokens" {...accesstokens} />
         <Resource name="plutusscripts" {...plutustscripts} />
         <Resource name="plutustxs" {...plutustxs} />
         <Resource name="contracts" {...yourplutustscripts} />
@@ -72,11 +78,18 @@ const App = () => {
         variant="subtitle2"
         align="left"
         color="orange"
-        sx={{ position: "fixed", right: 0, bottom: 10, left: 10, zIndex: 100 }}
+        sx={{
+          position: "fixed",
+          right: 0,
+          bottom: 10,
+          left: 10,
+          zIndex: 100,
+          backgroundColor: "white",
+          width: 200,
+        }}
       >
-        @ {new Date().getFullYear()} Built on Cardano <br/>
+        @ {new Date().getFullYear()} Built on Cardano <br />
       </Typography>
-   
     </MeshProvider>
   );
 };

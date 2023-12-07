@@ -29,6 +29,14 @@ export class AuthController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @Get('accesstoken')
+  async getToken(@Request() req, @Response() res: any) {
+    const result = await this.authService.createTokenDapp(req.user);
+
+    return res.json(result);
+  }
+
+  @UseGuards(JwtAuthGuard)
   @Get('profile')
   getProfile(@Request() req) {
     return req.user;

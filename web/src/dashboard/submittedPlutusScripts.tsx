@@ -42,7 +42,7 @@ const SubmittedPlutusScripts = (props) => {
         }),
       }}
       icon={DynamicFeedOutlinedIcon}
-      title="Plutus  smart contracts"
+      title="Smart contracts"
       subtitle={`${postedContracts} Registered scripts, ${inuseContracts} Published scripts`}
     >
       <List sx={{ display }}>

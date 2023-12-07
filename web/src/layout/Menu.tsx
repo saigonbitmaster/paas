@@ -89,7 +89,15 @@ const Menu = ({ dense = false }: MenuProps) => {
           dense={dense}
         />
       </SubMenu>
-
+      <MenuItemLink
+        to="/accesstokens"
+        state={{ _scrollToTop: true }}
+        primaryText={translate(`resources.tokens.name`, {
+          smart_count: 2,
+        })}
+        leftIcon={<FormatListNumberedOutlinedIcon />}
+        dense={dense}
+      />
       <SubMenu
         handleToggle={() => handleToggle("manageFund")}
         isOpen={state.manageFund}
@@ -150,6 +158,7 @@ const Menu = ({ dense = false }: MenuProps) => {
           leftIcon={<DoneAllIcon />}
           dense={dense}
         />
+
         <MenuItemLink
           to="/fetchCardano"
           state={{ _scrollToTop: true }}
@@ -175,6 +184,15 @@ const Menu = ({ dense = false }: MenuProps) => {
             smart_count: 2,
           })}
           leftIcon={<BlurOnIcon />}
+          dense={dense}
+        />
+        <MenuItemLink
+          to="/examples"
+          state={{ _scrollToTop: true }}
+          primaryText={translate(`resources.dApps.name`, {
+            smart_count: 2,
+          })}
+          leftIcon={<FormatListNumberedOutlinedIcon />}
           dense={dense}
         />
       </SubMenu>
