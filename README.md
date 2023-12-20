@@ -51,3 +51,6 @@ yarn build-web
 ```
 modify .env file variables reflect the login and API urls.
 ```
+
+## smart contract repo
+[Smart Contracts repo](https://github.com/saigonbitmaster/paas-smart-contracts)
